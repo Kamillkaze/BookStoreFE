@@ -23,7 +23,7 @@ export class BookService {
         author:"Gregg Dunnet",
         stars: 4,
         price: 10,
-        favorite: false,
+        favorite: true,
         imageUrl: "/assets/images/books/The Cove Gregg Dunnet.PNG"
       },
       {
