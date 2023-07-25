@@ -1,0 +1,16 @@
+<ul>
+    <li *ngFor="let book of bookImages">
+        <a href="">
+            <img src="{{book.imageUrl}}" alt="">
+            <div class="content">
+                <div class="title">{{book.title}}</div>
+                <div class="author">{{book.author}}</div>
+                <span class="favorite {{book.favorite?'': 'not'}}">
+                    ❤
+                </span>
+                <div class="stars">★ {{book.stars}}</div>
+                <div class="price">{{book.price | currency}}</div>
+            </div>
+        </a>
+    </li>
+</ul>
