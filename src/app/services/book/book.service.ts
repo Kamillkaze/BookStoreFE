@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookService {
 
-  getAllBookImages() {
+  getAllBooks() {
     return [
       {
         id:1,

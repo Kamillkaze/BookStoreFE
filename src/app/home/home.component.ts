@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book/book.service';
 import { Book } from '../models/Book';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,18 @@ import { Book } from '../models/Book';
 })
 export class HomeComponent implements OnInit {
 
-  bookImages: Book[] = [];
+  books: Book[] = [];
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-      this.bookImages = this.bookService.getAllBookImages();
+    this.route.params.subscribe(params => {
+      if (params['searchTerm']) {
+        this.books = this.bookService.getAllBooks().filter(book =>  
+          book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()))
+      } else {
+        this.books = this.bookService.getAllBooks();
+      }
+    })
   }
 }
