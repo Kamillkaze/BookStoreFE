@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,8 @@ export class BookService {
         stars: 0,
         price: 20,
         favorite: false,
-        imageUrl: "/assets/images/books/Murder in the family Cara Hunter.PNG"
+        imageUrl: "/assets/images/books/Murder in the family Cara Hunter.PNG",
+        tag: "Criminal"
       },
       {
         id:2,
@@ -24,7 +24,8 @@ export class BookService {
         stars: 4,
         price: 10,
         favorite: true,
-        imageUrl: "/assets/images/books/The Cove Gregg Dunnet.PNG"
+        imageUrl: "/assets/images/books/The Cove Gregg Dunnet.PNG",
+        tag: "Criminal"
       },
       {
         id:3,
@@ -33,8 +34,34 @@ export class BookService {
         stars: 2,
         price: 8,
         favorite: false,
-        imageUrl: "/assets/images/books/Yellowface Rebecca F. Kuang.PNG"
+        imageUrl: "/assets/images/books/Yellowface Rebecca F. Kuang.PNG",
+        tag: "Other"
       }
     ]
+  }
+
+  getAllTags() {
+    return [
+      {
+        name: 'All',
+        count: 3
+      },
+      {
+        name: 'Criminal',
+        count: 2
+      },
+      {
+        name: 'Other',
+        count:  1
+      }
+    ]
+  }
+
+  getAllBooksByTag(tag: string) {
+    if (tag.includes('All')) {
+      return this.getAllBooks();
+    } else {
+      return this.getAllBooks().filter(book => book.tag.includes(tag));
+    }
   }
 }
