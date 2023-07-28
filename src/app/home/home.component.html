@@ -2,8 +2,8 @@
 <app-tags></app-tags>
 <ul>
     <li *ngFor="let book of books">
-        <a href="">
-            <img src="{{book.imageUrl}}" alt="">
+        <a routerLink="/book/{{book.id}}">
+            <img src="{{book.imageUrl}}">
             <div class="content">
                 <div class="title">{{book.title}}</div>
                 <div class="author">{{book.author}}</div>

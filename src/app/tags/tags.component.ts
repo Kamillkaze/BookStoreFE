@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from '../services/book/book.service';
 import { Tag } from '../models/Tag';
 
@@ -7,8 +7,17 @@ import { Tag } from '../models/Tag';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.css']
 })
-export class TagsComponent {
-  tags: Tag[] = this.service.getAllTags();
+export class TagsComponent implements OnInit {
+  
+  @Input()
+  bookPageTags?:string[];
+  tags?:Tag[];
   
   constructor(private service: BookService) {}
+
+  ngOnInit(): void {
+    if (!this.bookPageTags) {
+      this.tags = this.service.getAllTags();      
+    }
+  }
 }

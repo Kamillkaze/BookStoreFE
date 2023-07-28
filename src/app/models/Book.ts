@@ -6,5 +6,5 @@ export class Book {
     price!:number;
     favorite:boolean = false;
     imageUrl!:string;
-    tag!:string;
+    tags!:string[];
 }

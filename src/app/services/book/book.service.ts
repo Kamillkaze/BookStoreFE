@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Book } from 'src/app/models/Book';
+import { Tag } from 'src/app/models/Tag';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  getAllBooks() {
+  getAllBooks(): Book[] {
     return [
       {
         id:1,
@@ -15,7 +17,7 @@ export class BookService {
         price: 20,
         favorite: false,
         imageUrl: "/assets/images/books/Murder in the family Cara Hunter.PNG",
-        tag: "Criminal"
+        tags: ["Criminal"]
       },
       {
         id:2,
@@ -25,7 +27,7 @@ export class BookService {
         price: 10,
         favorite: true,
         imageUrl: "/assets/images/books/The Cove Gregg Dunnet.PNG",
-        tag: "Criminal"
+        tags: ["Criminal"]
       },
       {
         id:3,
@@ -35,12 +37,12 @@ export class BookService {
         price: 8,
         favorite: false,
         imageUrl: "/assets/images/books/Yellowface Rebecca F. Kuang.PNG",
-        tag: "Other"
+        tags: ["Other"]
       }
     ]
   }
 
-  getAllTags() {
+  getAllTags(): Tag[] {
     return [
       {
         name: 'All',
@@ -57,11 +59,15 @@ export class BookService {
     ]
   }
 
-  getAllBooksByTag(tag: string) {
+  getAllBooksByTag(tag: string): Book[] {
     if (tag.includes('All')) {
       return this.getAllBooks();
     } else {
-      return this.getAllBooks().filter(book => book.tag.includes(tag));
+      return this.getAllBooks().filter(book => book.tags.includes(tag));
     }
+  }
+
+  getBookById(id: number): Book {
+    return this.getAllBooks().find(book => book.id == id)!;
   }
 }
