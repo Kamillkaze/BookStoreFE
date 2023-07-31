@@ -1,0 +1,29 @@
+<div class="container">
+    <ul class="list">
+        <li *ngFor="let item of cart.items">
+            <div>
+                <img [src]="item.book.imageUrl" [alt]="item.book.title">
+            </div>
+            <div>
+                <a routerLink="/book/{{item.book.id}}">
+                    {{item.book.title}}
+                </a>
+            </div>
+            <div class="quantitySelector">
+                <button [disabled]="item.quantity <= 1" (click)="decreaseQuantity(item)">-</button>
+                    {{item.quantity}}
+                <button (click)="increaseQuantity(item)">+</button>
+            </div>
+            <div>{{item.totalPrice | currency}}</div>
+            <div>
+                <button (click)="removeFromCart(item)">Remove</button>
+            </div>
+        </li>
+    </ul>
+    <div class="summary">
+        <div>
+            <div class="item-count">{{cart.items.length}}</div>
+            <div class="total-price">{{cart.totalValue | currency}}</div>
+        </div>    
+    </div>
+</div>

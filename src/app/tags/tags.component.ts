@@ -13,11 +13,11 @@ export class TagsComponent implements OnInit {
   bookPageTags?:string[];
   tags?:Tag[];
   
-  constructor(private service: BookService) {}
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     if (!this.bookPageTags) {
-      this.tags = this.service.getAllTags();      
+      this.tags = this.bookService.getAllTags();      
     }
   }
 }

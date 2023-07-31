@@ -15,6 +15,6 @@
             <app-tags [bookPageTags]="book.tags"></app-tags>
         </div>
         <div class="price">{{book.price | currency}}</div>
-        <button class="button">Add to cart</button>
+        <button class="button" (click)="addToCart()">Add to cart</button>
     </div>
 </div>
