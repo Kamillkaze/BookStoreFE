@@ -1,4 +1,7 @@
-<div class="container">
+<app-not-found [visible]="!book" 
+notFoundMessage="That books doesn't exist" 
+resetLinkText="Go to homepage"></app-not-found>
+<div *ngIf="book" class="container">
     <img src="{{book.imageUrl}}" alt="{{book.title}}">
     <div class="details">
         <div class="header">
