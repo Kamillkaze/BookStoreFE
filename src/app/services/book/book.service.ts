@@ -1,73 +1,34 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Book } from 'src/app/models/Book';
 import { Tag } from 'src/app/models/Tag';
+import { GET_BOOKS_BY_ID_URL, GET_BOOKS_BY_TAG_URL, GET_BOOKS_URL, GET_TAGS_URL } from 'src/app/utils/url.addresses';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  getAllBooks(): Book[] {
-    return [
-      {
-        id:1,
-        title:"Murder in the family",
-        author:"Cara Hunter",
-        stars: 0,
-        price: 20,
-        favorite: false,
-        imageUrl: "/assets/images/books/Murder in the family Cara Hunter.PNG",
-        tags: ["Criminal"]
-      },
-      {
-        id:2,
-        title:"The Cove",
-        author:"Gregg Dunnet",
-        stars: 4,
-        price: 10,
-        favorite: true,
-        imageUrl: "/assets/images/books/The Cove Gregg Dunnet.PNG",
-        tags: ["Criminal"]
-      },
-      {
-        id:3,
-        title:"Yellowface",
-        author:"Rebecca F. Kuang",
-        stars: 2,
-        price: 8,
-        favorite: false,
-        imageUrl: "/assets/images/books/Yellowface Rebecca F. Kuang.PNG",
-        tags: ["Other"]
-      }
-    ]
+  constructor(private httpClient: HttpClient){}
+
+  getAllBooks(): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(GET_BOOKS_URL);
   }
 
-  getAllTags(): Tag[] {
-    return [
-      {
-        name: 'All',
-        count: 3
-      },
-      {
-        name: 'Criminal',
-        count: 2
-      },
-      {
-        name: 'Other',
-        count:  1
-      }
-    ]
+  getAllTags(): Observable<Tag[]> {
+    return this.httpClient.get<Tag[]>(GET_TAGS_URL);
   }
 
-  getAllBooksByTag(tag: string): Book[] {
+  getAllBooksByTag(tag: string): Observable<Book[]> {
     if (tag.includes('All')) {
       return this.getAllBooks();
     } else {
-      return this.getAllBooks().filter(book => book.tags.includes(tag));
+      return this.httpClient.get<Book[]>(GET_BOOKS_BY_TAG_URL + tag);
     }
   }
 
-  getBookById(id: number): Book {
-    return this.getAllBooks().find(book => book.id == id)!;
+  getBookById(id: number): Observable<Book> {
+    return this.httpClient.get<Book>(GET_BOOKS_BY_ID_URL + id);
   }
 }

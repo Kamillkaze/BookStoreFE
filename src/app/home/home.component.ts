@@ -3,6 +3,7 @@ import { BookService } from '../services/book/book.service';
 import { Book } from '../models/Book';
 import { ActivatedRoute } from '@angular/router';
 import { Tag } from '../models/Tag';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,15 +12,15 @@ import { Tag } from '../models/Tag';
 })
 export class HomeComponent implements OnInit {
 
-  books: Book[] = [];
+  books!: Observable<Book[]>;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if (params['searchTerm']) {
-        this.books = this.bookService.getAllBooks().filter(book =>  
-          book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()))
+        // this.books = this.bookService.getAllBooks().filter(book =>  
+        //   book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()))
       } else if (params['tag']) {
         this.books = this.bookService.getAllBooksByTag(params['tag']);
       } else {

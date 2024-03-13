@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from '../services/book/book.service';
 import { Tag } from '../models/Tag';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tags',
@@ -11,7 +12,7 @@ export class TagsComponent implements OnInit {
   
   @Input()
   bookPageTags?:string[];
-  tags?:Tag[];
+  tags?: Observable<Tag[]>;
   
   constructor(private bookService: BookService) {}
 
@@ -19,5 +20,7 @@ export class TagsComponent implements OnInit {
     if (!this.bookPageTags) {
       this.tags = this.bookService.getAllTags();      
     }
+    // this.bookService.getAllTags()
+    // .subscribe((tags: Tag[]) => this.tags = tags);
   }
 }

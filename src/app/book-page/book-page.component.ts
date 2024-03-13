@@ -20,13 +20,14 @@ export class BookPageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.book = this.bookService.getBookById(params['id']);
+        this.bookService.getBookById(params['id'])
+          .subscribe(book => this.book = book);;
       }
     })
   }
 
   addToCart(): void {
-    this.cartService.addToCart(this.book);
+    // this.cartService.addToCart(this.book);
     this.router.navigateByUrl('/cart-page');
   }
 }
