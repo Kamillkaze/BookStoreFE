@@ -20,17 +20,17 @@ export class CartPageComponent {
   }
 
   removeFromCart(cartItem: CartItem): void {
-    this.cartService.removeFromCart(cartItem.book.id);
+    this.cartService.removeFromCart(cartItem.book.urlId);
     this.setCart();
   }
 
   increaseQuantity(cartItem: CartItem) {
-    this.cartService.changeQuantity(cartItem.book.id, cartItem.quantity + 1);
+    this.cartService.changeQuantity(cartItem.book.urlId, cartItem.quantity + 1);
     this.setCart();
   }
 
   decreaseQuantity(cartItem: CartItem) {
-    this.cartService.changeQuantity(cartItem.book.id, cartItem.quantity - 1);
+    this.cartService.changeQuantity(cartItem.book.urlId, cartItem.quantity - 1);
     this.setCart();
   }
 }

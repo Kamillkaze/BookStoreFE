@@ -1,11 +1,11 @@
 <app-search></app-search>
 <app-tags></app-tags>
-<app-not-found [visible]="!books.length" 
+<app-not-found [visible]="!books" 
 notFoundMessage="Book not found" 
 resetLinkText="Reset search"></app-not-found>
 <ul>
-    <li *ngFor="let book of books">
-        <a routerLink="/book/{{book.id}}">
+    <li *ngFor="let book of books | async">
+        <a routerLink="/book/{{book.urlId}}">
             <img src="{{book.imageUrl}}">
             <div class="content">
                 <div class="title">{{book.title}}</div>

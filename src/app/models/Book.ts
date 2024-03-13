@@ -1,5 +1,5 @@
 export class Book {
-    id!:number;
+    urlId!:string;
     title!:string;
     author!:string;
     stars:number = 0;
