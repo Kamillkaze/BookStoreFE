@@ -1,6 +1,23 @@
 # BookstoreFrontend
 
+#### Project under development. 
+
+It is a FrontEnd part for BookStore application backend.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+
+
+## Prerequisites
+
+- Node.js from https://nodejs.org/en
+- Install Angular CLI according to instruction on https://angular.io/cli
+
+## Running project 
+
+On command line in the project folder run:
+1. npm install
+2. ng serve
+3. Go to http://localhost:4200/ to see the app running
 
 ## Development server
 
