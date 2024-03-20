@@ -12,20 +12,35 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  books!: Observable<Book[]>;
+  allBooks!: Book[];
+  booksToDisplay!: Book[];
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.subscribeToAllBooks();
+    this.subscribeToPathParams();
+  }
+
+  private subscribeToAllBooks(): void {
+    this.bookService.getAllBooks()
+      .subscribe((books: Book[]) => {
+        this.allBooks = books;
+        this.booksToDisplay = this.allBooks;
+      });
+  }
+
+  private subscribeToPathParams(): void {
     this.route.params.subscribe(params => {
       if (params['searchTerm']) {
-        // this.books = this.bookService.getAllBooks().filter(book =>  
-        //   book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()))
+        this.booksToDisplay = this.allBooks.filter(book =>
+          book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()));
       } else if (params['tag']) {
-        this.books = this.bookService.getAllBooksByTag(params['tag']);
+        this.booksToDisplay = this.allBooks.filter(book =>
+          book.title.toLowerCase().includes(params['tag'].toLowerCase()));
       } else {
-        this.books = this.bookService.getAllBooks();
+        this.booksToDisplay = this.allBooks;
       }
-    })
+    });
   }
 }
