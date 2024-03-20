@@ -12,8 +12,8 @@ import { CartService } from '../services/cart/cart.service';
 export class BookPageComponent implements OnInit {
   book!: Book;
 
-  constructor(private bookService: BookService, 
-              private route: ActivatedRoute, 
+  constructor(private bookService: BookService,
+              private route: ActivatedRoute,
               private cartService: CartService,
               private router: Router) {}
 
@@ -27,7 +27,7 @@ export class BookPageComponent implements OnInit {
   }
 
   addToCart(): void {
-    // this.cartService.addToCart(this.book);
+    this.cartService.addToCart(this.book);
     this.router.navigateByUrl('/cart-page');
   }
 }
