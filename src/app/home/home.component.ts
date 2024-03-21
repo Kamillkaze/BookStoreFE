@@ -12,35 +12,44 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  allBooks!: Book[];
   booksToDisplay!: Book[];
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.subscribeToAllBooks();
     this.subscribeToPathParams();
-  }
-
-  private subscribeToAllBooks(): void {
-    this.bookService.getAllBooks()
-      .subscribe((books: Book[]) => {
-        this.allBooks = books;
-        this.booksToDisplay = this.allBooks;
-      });
   }
 
   private subscribeToPathParams(): void {
     this.route.params.subscribe(params => {
       if (params['searchTerm']) {
-        this.booksToDisplay = this.allBooks.filter(book =>
-          book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()));
+        this.subscribeToBooksByPhrase(params['searchTerm']);
       } else if (params['tag']) {
-        this.booksToDisplay = this.allBooks.filter(book =>
-          book.tags.includes(params['tag'].toLowerCase()));
+        this.subscribeToBooksByTag(params['tag']);
       } else {
-        this.booksToDisplay = this.allBooks;
+        this.subscribeToAllBooks();
       }
     });
+  }
+
+  private subscribeToAllBooks(): void {
+    this.bookService.getAllBooks()
+      .subscribe((books: Book[]) => {
+        this.booksToDisplay = books;
+      });
+  }
+
+  private subscribeToBooksByPhrase(phrase: string): void {
+    this.bookService.getAllBooksByPhrase(phrase.toLowerCase())
+      .subscribe((books: Book[]) => {
+        this.booksToDisplay = books;
+      });
+  }
+
+  private subscribeToBooksByTag(tag: string): void {
+    this.bookService.getAllBooksByTag(tag.toLowerCase())
+      .subscribe((books: Book[]) => {
+        this.booksToDisplay = books;
+      });
   }
 }

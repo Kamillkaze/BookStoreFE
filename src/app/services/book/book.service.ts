@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from 'src/app/models/Book';
 import { Tag } from 'src/app/models/Tag';
-import { GET_BOOKS_BY_ID_URL, GET_BOOKS_BY_TAG_URL, GET_BOOKS_URL, GET_TAGS_URL } from 'src/app/utils/url.addresses';
+import {
+  GET_BOOKS_BY_ID_URL,
+  GET_BOOKS_BY_TAG_URL,
+  GET_BOOKS_BY_PHRASE_URL,
+  GET_BOOKS_URL, GET_TAGS_URL
+  } from 'src/app/utils/url.addresses';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +26,11 @@ export class BookService {
   }
 
   getAllBooksByTag(tag: string): Observable<Book[]> {
-    if (tag.includes('All')) {
-      return this.getAllBooks();
-    } else {
-      return this.httpClient.get<Book[]>(GET_BOOKS_BY_TAG_URL + tag);
-    }
+    return this.httpClient.get<Book[]>(GET_BOOKS_BY_TAG_URL + tag);
+  }
+
+  getAllBooksByPhrase(phrase: string): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(GET_BOOKS_BY_PHRASE_URL + phrase);
   }
 
   getBookById(id: number): Observable<Book> {
