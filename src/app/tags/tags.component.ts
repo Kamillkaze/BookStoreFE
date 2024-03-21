@@ -9,18 +9,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./tags.component.css']
 })
 export class TagsComponent implements OnInit {
-  
+
   @Input()
   bookPageTags?:string[];
-  tags?: Observable<Tag[]>;
-  
+  tags?: Tag[];
+
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     if (!this.bookPageTags) {
-      this.tags = this.bookService.getAllTags();      
+      this.bookService.getAllTags()
+      .subscribe((tags: Tag[]) => this.tags = tags);
     }
-    // this.bookService.getAllTags()
-    // .subscribe((tags: Tag[]) => this.tags = tags);
   }
 }

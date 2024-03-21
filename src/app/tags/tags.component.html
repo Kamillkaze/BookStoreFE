@@ -1,10 +1,10 @@
 <div *ngIf="tags">
-    <a href="" *ngFor="let tag of tags | async" routerLink="/tag/{{tag.name}}">
-        {{tag.name}}({{tag.count}}) 
+    <a href="" *ngFor="let tag of tags" routerLink="/tag/{{tag.name}}">
+        {{tag.name}}({{tag.count}})
     </a>
 </div>
 <div *ngIf="bookPageTags">
     <a href="" *ngFor="let bookTag of bookPageTags" routerLink="/tag/{{bookTag}}">
-        {{bookTag}} 
+        {{bookTag}}
     </a>
 </div>

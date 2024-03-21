@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
           book.title.toLowerCase().includes(params['searchTerm'].toLowerCase()));
       } else if (params['tag']) {
         this.booksToDisplay = this.allBooks.filter(book =>
-          book.title.toLowerCase().includes(params['tag'].toLowerCase()));
+          book.tags.includes(params['tag'].toLowerCase()));
       } else {
         this.booksToDisplay = this.allBooks;
       }
