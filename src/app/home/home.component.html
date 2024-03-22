@@ -6,7 +6,7 @@ resetLinkText="Reset search"></app-not-found>
 <ul>
     <li *ngFor="let book of booksToDisplay">
         <a routerLink="/book/{{book.urlId}}">
-            <img src="{{book.imageUrl}}">
+            <img [src]="book.imageUrl">
             <div class="content">
                 <div class="title">{{book.title}}</div>
                 <div class="author">{{book.author}}</div>
